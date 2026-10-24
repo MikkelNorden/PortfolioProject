@@ -1,14 +1,13 @@
 package app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
+@Table(name = "entries")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +16,17 @@ public class Entry {
 
     @Id
     @GeneratedValue
-    int id;
-    String name;
-    String description;
+    @Column(name = "entry_id")
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "entry_description")
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "list_id")
+    @ToString.Exclude
+    private UserList list;
 }
